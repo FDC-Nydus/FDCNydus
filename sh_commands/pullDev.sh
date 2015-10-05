@@ -1,1 +1,0 @@
-cd /vagrant/workspace/nc_add_d && git pull origin master
