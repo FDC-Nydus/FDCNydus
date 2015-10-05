@@ -1,0 +1,1 @@
+cd /vagrant/workspace/nc_add_d && git merge --abort

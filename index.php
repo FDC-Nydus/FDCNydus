@@ -5,11 +5,11 @@ $path = dirname(__FILE__);
 require_once($path."/inc/inc.php");
 
 // declare error handler
-$error = new ErrorHandler();
+$notification = new NotificationInvoker();
 
 // check if post is TRUE
-if (isset($_POST) === FALSE) {
-	$error->writeError(array("content" => "Invalid POST data"));
+if (isset($_POST['payload']) === FALSE) {
+	$notification->writeError(array("content" => "Invalid POST data"));
 	exit();
 }
 
@@ -21,7 +21,7 @@ $webhook = new FDCWebhook($payload);
 
 // check if the branch is allowed
 if ($webhook->isAllowedBranch() === FALSE) {
-	$error->writeError(array("content" => "Invalid branch origin : ".$payload->ref));
+	$notification->writeError(array("content" => "Invalid branch origin : ".$payload->ref));
 	exit();
 }
 

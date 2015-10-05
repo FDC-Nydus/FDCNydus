@@ -12,6 +12,9 @@ class SlackInvoker {
 	}
 
 	public function sendSlack(){
+		// TODO : remove
+		return;
+		
 		$token = $this->token;
 		
 		$slack = "https://slack.com/api/chat.postMessage";
@@ -21,19 +24,19 @@ class SlackInvoker {
 		$slack .= "&username=".urlencode($this->username);
 		
 		$cookie = tempnam ("/tmp", "CURLCOOKIE");
-			$ch     = curl_init();
-			$headers = array();
-			$headers[] = 'Content-type: charset=utf-8'; 
-			$headers[] = 'Connection: Keep-Alive';
-			curl_setopt( $ch, CURLOPT_URL, $slack );
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			
+		$ch     = curl_init();
+		$headers = array();
+		$headers[] = 'Content-type: charset=utf-8'; 
+		$headers[] = 'Connection: Keep-Alive';
+		curl_setopt( $ch, CURLOPT_URL, $slack );
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		
 	    $content = curl_exec( $ch );
 	    $response = curl_getinfo( $ch );
-			curl_error($ch);
+		curl_error($ch);
 	    curl_close ( $ch );
 		return $response["http_code"];
 	}
