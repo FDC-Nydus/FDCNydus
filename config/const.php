@@ -15,4 +15,4 @@ CONST GIT_BRANCH = "master";
 CONST GIT_BRANCH_LABEL = "Development Branch";
 
 // site name
-CONST SITE_NAME = "http//english.fdc-inc.com";
+CONST SITE_NAME = "http://english.fdc-inc.com";

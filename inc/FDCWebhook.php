@@ -52,7 +52,7 @@ class FDCWebhook{
 
 		$slackMessage .= "*COMMIT LINK*";
 		$slackMessage .= "```";
-		$slackMessage .= "commit_link";
+		$slackMessage .= $this->payload->compare;
 		$slackMessage .= "```\n";
 
 		$slackMessage .= "*SITE*";
