@@ -28,9 +28,9 @@ class FDCWebhook{
 		$return = array();
 
 		// execute pull command
-		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git fetch origin master');
-		$return['pull_result'] = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git reset --hard FETCH_HEAD 2>&1');
-		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git clean -df');
+		$this->executeCommand('cd ' . MAIN_DIR . ' && git fetch origin master');
+		$return['pull_result'] = $this->executeCommand('cd ' . MAIN_DIR . ' && git reset --hard FETCH_HEAD 2>&1');
+		$this->executeCommand('cd ' . MAIN_DIR . ' && git clean -df');
 
 		// return for hook window
 		echo "PULL RETURN \n";
