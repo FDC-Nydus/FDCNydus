@@ -35,7 +35,7 @@ class FDCWebhook{
 	// handle the git result
 	public function handleGitResult($result){
 		// check if conflicts occured or some other error occured.
-		// in the result string, for "pull", Code:0 = success, Code:1 = fail, Code:<anything else> = we'll assume as fail
+		// in the result string, for "pull", status_code=0 = success, status_code=1 = fail, status_code=<anything else> = we'll assume as fail
 		// if errors occured
 		// execute sh_commands/conflct.sh
 		// append error message + files
