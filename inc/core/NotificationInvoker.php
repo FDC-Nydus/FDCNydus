@@ -28,9 +28,6 @@ class NotificationInvoker{
 			// open directory
 			fopen(dirname(DIR).$filename, "a");
 			file_put_contents(dirname(DIR).$filename, $errMsg, FILE_APPEND);
-
-			// push to slack
-			self::$slack->sendSlack($errMsg);
 		}
 	}
 }
