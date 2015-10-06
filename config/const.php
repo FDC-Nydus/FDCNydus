@@ -5,9 +5,6 @@ CONST DIR = __DIR__;
 // main directory
 CONST MAIN_DIR = "/vagrant/workspace/FDCDevRepo";
 
-// sh commands
-CONST SH_DIR = "sh_commands";
-
 // master
 CONST GIT_BRANCH = "master";
 
