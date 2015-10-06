@@ -32,7 +32,6 @@ class FDCWebhook{
 		$this->executeCommand('cd ' . MAIN_DIR . ' && git fetch origin master');
 		$return['pull_result'] = $this->executeCommand('cd ' . MAIN_DIR . ' && git reset --hard FETCH_HEAD 2>&1');
 		$this->executeCommand('cd ' . MAIN_DIR . ' && git clean -df');
-		$return['pull_hash'] = $this->executeCommand('cd ' . MAIN_DIR . ' && git rev-parse HEAD');
 
 		// return for hook window
 		echo "PULL RETURN \n";
