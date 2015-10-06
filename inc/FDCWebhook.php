@@ -5,10 +5,11 @@ class FDCWebhook{
 	// payload container
 	private $payload =  NULL;
 	public static $slack = "";
+
 	// construct
 	function __construct($payload = NULL){
 		$this->payload = $payload;
-		self::$slack = new SlackInvoker();
+		$this->slack = new SlackInvoker();
 	}
 
 	// check if branch is allowed
@@ -63,10 +64,10 @@ class FDCWebhook{
 		$slackUname = GIT_BRANCH_LABEL." Auto Deployment " . date('Y/m/d H:i:s');
 
 		// set the slack username
-		self::$slack->username = $slackUname;
-
+		$this->slack->username = $slackUname;
+		
 		// send slack message
-		self::$slack->sendSlack($slackMessage);
+		$this->slack->sendSlack($slackMessage);
 	}
 
 	// execute command
