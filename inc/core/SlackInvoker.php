@@ -1,22 +1,22 @@
 <?php
 class SlackInvoker {
 	// public $timeout  = 5; //set timeout 
-	public static $channel  = "#nc-deploy"; //set the default channel
-	// public static $text     = NULL; //send text
-	public static $token    = "xoxp-3193633639-5180400243-5161824998-602ce1"; //set token
-	public static $username = "bot";
+	public $channel  = "#nc-deploy"; //set the default channel
+	public $text     = NULL; //send text
+	public $token    = "xoxp-3193633639-5180400243-5161824998-602ce1"; //set token
+	public $username = "bot";
 
 	// construct
 	function __construct(){
 	}
 
-	public static function sendSlack(){
+	public function sendSlack(){
 		$token = $this->token;
 		
 		$slack = "https://slack.com/api/chat.postMessage";
 		$slack .= "?token=".$this->token;
 		$slack .= "&channel=".urlencode($this->channel);
-		$slack .= "&text=".urlencode($text);
+		$slack .= "&text=".urlencode($this->text);
 		$slack .= "&username=".urlencode($this->username);
 		
 		$cookie = tempnam ("/tmp", "CURLCOOKIE");

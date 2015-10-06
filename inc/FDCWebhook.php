@@ -47,13 +47,13 @@ class FDCWebhook{
 		$slackMessage = "";
 		$slackMessage .= "*PULL RESULT*";
 		$slackMessage .= "```";
-		$slackMessage .= $result;
+		$slackMessage .= $result['pull_result'];
 		$slackMessage .= "```\n";
 
 		$slackMessage .= "*COMMIT LINK*";
 		$slackMessage .= "```";
-		$slackMessage .= "";
-		$slackMessage .= "```";
+		$slackMessage .= "commit_link";
+		$slackMessage .= "```\n";
 
 		$slackMessage .= "*SITE*";
 		$slackMessage .= "```";
@@ -65,7 +65,10 @@ class FDCWebhook{
 
 		// set the slack username
 		$this->slack->username = $slackUname;
-		
+			
+		// set the slack message
+		$this->slack->text = $slackMessage;
+
 		// send slack message
 		$this->slack->sendSlack($slackMessage);
 	}
