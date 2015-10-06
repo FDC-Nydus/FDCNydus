@@ -26,12 +26,16 @@ class FDCWebhook{
 	// pull from dev branch
 	public function executePull(){
 		// execute pull command
-		$return = $this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_PULL);
+		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git fetch origin master');
+		$return1 = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git reset --hard FETCH_HEAD');
+		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git clean -df');
 
 		// return for hook window
 		echo "PULL RETURN \n";
 		echo $return . "\n";
-			
+		echo $return1 . "\n";
+		echo $return2 . "\n";
+
 		// handle the git result
 		$this->handleGitResult($return);
 	}
@@ -46,7 +50,7 @@ class FDCWebhook{
 		// contains the message for slack
 		$slackMessage = "";
 
-		// if something went wrong, abort merge
+		/*// if something went wrong, abort merge
 		if (strpos($result, "status_code=0") === FALSE) {
 			// abort merging
 			$abort = $this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
@@ -55,12 +59,11 @@ class FDCWebhook{
 					'subject' => 'Merge Error',
 					'content' => $result
 			);
-			$this->notification->writeError($errData);
-
+			//$this->notification->writeError($errData);
 			// return for hook window
 			echo "ABORT MESSAGE \n";
 			echo $abort . "\n";
-		}
+		}*/
 
 		// slack message construction
 		$slackMessage .= "```";
