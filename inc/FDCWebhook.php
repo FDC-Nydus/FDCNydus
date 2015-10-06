@@ -1,4 +1,6 @@
 <?php 
+require_once(dirname(DIR)."/inc/inc.php");
+
 class FDCWebhook{
 	// payload container
 	private $payload =  NULL;
@@ -6,6 +8,7 @@ class FDCWebhook{
 	// construct
 	function __construct($payload = NULL){
 		$this->payload = $payload;
+		$notification = new NotificationInvoker();
 	}
 
 	// check if branch is allowed
@@ -51,6 +54,14 @@ class FDCWebhook{
 			// return for hook window
 			echo "ABORT MESSAGE \n";
 			echo $abort . "\n";
+		}
+
+		if (strpos($result, "status_code=1") == 0) {
+			$errData = array(
+					'subject' => 'Merge Conflict',
+					'content' => $result
+				);
+			$notification->writeError($errData);
 		}
 
 		// slack message construction
