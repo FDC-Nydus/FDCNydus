@@ -21,6 +21,7 @@ $webhook = new FDCWebhook($payload);
 
 // check if the branch is allowed
 if ($webhook->isAllowedBranch() === FALSE) {
+	echo "Branch Origin should be from ".GIT_BRANCH;
 	exit();
 }
 

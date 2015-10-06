@@ -4,7 +4,7 @@ class FDCWebhook{
 	private $payload =  NULL;
 
 	// construct
-	function __construct($payload){
+	function __construct($payload = NULL){
 		$this->payload = $payload;
 	}
 
@@ -22,7 +22,11 @@ class FDCWebhook{
 
 	// pull from dev branch
 	public function executePull(){
-		$return = shell_exec('sh '.dirname(DIR).'/'.SH_DIR.'/pullDev.sh');
+		$return = $this->executeCommand('sh '.dirname(DIR).'/'.SH_DIR.'/pull.sh');
+
+		// return for git window
+		echo $return . "\n";
+		
 		$this->handleGitResult($return);
 	}
 
@@ -33,5 +37,13 @@ class FDCWebhook{
 		// execute sh_commands/conflct.sh
 		// append error message + files
 		// execute clearConflicts.sh in sh_commands to abort merge
+	}
+
+	public function executeCommand($command){
+		ob_start();
+		system($command);
+		$output = ob_get_contents();
+		ob_end_clean();
+		return $output;
 	}
 }
