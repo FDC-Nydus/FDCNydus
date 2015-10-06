@@ -4,11 +4,12 @@ require_once(dirname(DIR)."/inc/inc.php");
 class FDCWebhook{
 	// payload container
 	private $payload =  NULL;
+	private $slack;
 
 	// construct
 	function __construct($payload = NULL){
 		$this->payload = $payload;
-		self::$slack = new SlackInvoker();
+		$this->slack = new SlackInvoker();
 	}
 
 	// check if branch is allowed
@@ -47,6 +48,7 @@ class FDCWebhook{
 
 	// handle the git result
 	public function handleGitResult($result){
+		date_default_timezone_set("Asia/Singapore");
 		// check if conflicts occured or some other error occured.
 		// in the result string, for "pull", status_code=0 = success, status_code=1 = fail, status_code=<anything else> = we'll assume as fail
 		// if errors occured
@@ -72,15 +74,19 @@ class FDCWebhook{
 
 		// slack message construction
 		$slackMessage .= "```";
-		$slackMessage .= "Date: ".date('Y/m/d H:i:s');
-		$slackMessage .= "LIST OF FILES CHANGED";
+		$slackMessage .= "PULL RESULT".PHP_EOL;
+		$slackMessage .= $result;
+		$slackMessage .= "```".PHP_EOL;
+
+		$slackMessage .= "```";
+		$slackMessage .= "LIST OF FILES CHANGED".PHP_EOL;
 		$slackMessage .= $result;
 		$slackMessage .= "```";
 
 		// slack username
 		$slackUname = GIT_BRANCH_LABEL." auto deployment ".date("Y-m-d H:i:s");
 
-			self::$slack->sendSlack($slackMessage);
+		$this->slack->sendSlack($slackMessage);
 	}
 
 	// execute command
