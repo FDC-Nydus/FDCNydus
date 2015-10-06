@@ -70,7 +70,7 @@ class FDCWebhook{
 		$this->slack->text = $slackMessage;
 
 		// send slack message
-		$this->slack->sendSlack($slackMessage);
+		$this->slack->sendSlack();
 	}
 
 	// execute command
