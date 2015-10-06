@@ -1,17 +1,17 @@
 <?php
 class SlackInvoker {
 	// public $timeout  = 5; //set timeout 
-	public $channel  = "#nc-deploy"; //set the default channel
-	public $text     = NULL; //send text
-	public $token    = "xoxp-3193633639-5180400243-5161824998-602ce1"; //set token
-	public $username = "bot";
+	public static $channel  = "#nc-deploy"; //set the default channel
+	public static $text     = NULL; //send text
+	public static $token    = "xoxp-3193633639-5180400243-5161824998-602ce1"; //set token
+	public static $username = "bot";
 
 	// construct
 	function __construct($content = NULL){
 		$this->text = $content;
 	}
 
-	public function sendSlack(){
+	public static function sendSlack(){
 		// TODO : remove
 		return;
 		

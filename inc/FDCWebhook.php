@@ -4,7 +4,7 @@ require_once(dirname(DIR)."/inc/inc.php");
 class FDCWebhook{
 	// payload container
 	private $payload =  NULL;
-
+	public static $slack = "";
 	// construct
 	function __construct($payload = NULL){
 		$this->payload = $payload;
