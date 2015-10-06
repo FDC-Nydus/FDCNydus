@@ -51,17 +51,15 @@ class FDCWebhook{
 			// abort merging
 			$abort = $this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
 			
+			$errData = array(
+					'subject' => 'Merge Error',
+					'content' => $result
+			);
+			$this->notification->writeError($errData);
+
 			// return for hook window
 			echo "ABORT MESSAGE \n";
 			echo $abort . "\n";
-		}
-
-		if (strpos($result, "status_code=1") == 0) {
-			$errData = array(
-					'subject' => 'Merge Conflict',
-					'content' => $result
-				);
-			$notification->writeError($errData);
 		}
 
 		// slack message construction
