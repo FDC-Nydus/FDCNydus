@@ -6,3 +6,4 @@ CONST SH_CONFLICTS = "conflict.sh";
 CONST SH_CLEAR_CONFLICT = "abortMerge.sh";
 CONST GIT_BRANCH = "master";
 CONST GIT_BRANCH_LABEL = "Master Branch";
+CONST REPO_DIR = "/vagrant/workspace/FDCDevRepo";

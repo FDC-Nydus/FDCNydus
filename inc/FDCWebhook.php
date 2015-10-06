@@ -29,12 +29,12 @@ class FDCWebhook{
 		$return = array();
 
 		// execute pull command
-		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git fetch origin master');
-		$return['pull_result'] = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git reset --hard FETCH_HEAD 2>&1');
-		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git clean -df');
+		$this->executeCommand('cd '. REPO_DIR .' && git fetch origin master');
+		$return['pull_result'] = $this->executeCommand('cd '. REPO_DIR .' && git reset --hard FETCH_HEAD 2>&1');
+		$this->executeCommand('cd '. REPO_DIR .' && git clean -df');
 
 		// get list of files to be pushed
-		$return['file_list'] = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git diff --stat');
+		$return['file_list'] = $this->executeCommand('cd '. REPO_DIR .' && git diff --stat');
 
 		// return for hook window
 		echo "PULL RETURN \n";
@@ -75,12 +75,12 @@ class FDCWebhook{
 		// slack message construction
 		$slackMessage .= "```";
 		$slackMessage .= "PULL RESULT".PHP_EOL;
-		$slackMessage .= $result;
+		$slackMessage .= $result['pull_result'];
 		$slackMessage .= "```".PHP_EOL;
 
 		$slackMessage .= "```";
 		$slackMessage .= "LIST OF FILES CHANGED".PHP_EOL;
-		$slackMessage .= $result;
+		$slackMessage .= isset($result['file_list']) ? $result['file_list'] : "No files Changed";
 		$slackMessage .= "```";
 
 		// slack username
