@@ -1,4 +1,6 @@
 <?php 
+require_once(dirname(DIR)."/inc/inc.php");
+
 class FDCWebhook{
 	// payload container
 	private $payload =  NULL;
@@ -6,6 +8,7 @@ class FDCWebhook{
 	// construct
 	function __construct($payload = NULL){
 		$this->payload = $payload;
+		$notification = new NotificationInvoker();
 	}
 
 	// check if branch is allowed
@@ -44,6 +47,14 @@ class FDCWebhook{
 		// if something went wrong, abort merge
 		if (strpos($result, "status_code=0") == 0) {
 			$this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
+		}
+
+		if (strpos($result, "status_code=1") == 0) {
+			$errData = array(
+					'subject' => 'Merge Conflict',
+					'content' => $result
+				);
+			$notification->writeError($errData);
 		}
 
 		$slackMessage = "```";
