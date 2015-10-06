@@ -25,7 +25,8 @@ class FDCWebhook{
 		// execute pull command
 		$return = $this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_PULL);
 
-		// return for git window
+		// return for hook window
+		echo "PULL RETURN \n";
 		echo $return . "\n";
 			
 		// handle the git result
@@ -43,9 +44,13 @@ class FDCWebhook{
 		$slackMessage = "";
 
 		// if something went wrong, abort merge
-		if (strpos($result, "status_code=0") == 0) {
-			$slackMessage .= "Aborting merge \n";
-			$this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
+		if (strpos($result, "status_code=0") === FALSE) {
+			// abort merging
+			$abort = $this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
+			
+			// return for hook window
+			echo "ABORT MESSAGE \n";
+			echo $abort . "\n";
 		}
 
 		// slack message construction

@@ -1,1 +1,1 @@
-cd /vagrant/workspace/FDCDevRepo && git merge --abort
+cd /vagrant/workspace/FDCDevRepo && git reset --merge  2>&1;
