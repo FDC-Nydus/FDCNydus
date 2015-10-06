@@ -22,11 +22,13 @@ class FDCWebhook{
 
 	// pull from dev branch
 	public function executePull(){
-		$return = $this->executeCommand('sh '.dirname(DIR).'/'.SH_DIR.'/pull.sh');
+		// execute pull command
+		$return = $this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_PULL);
 
 		// return for git window
 		echo $return . "\n";
-		
+			
+		// handle the git result
 		$this->handleGitResult($return);
 	}
 

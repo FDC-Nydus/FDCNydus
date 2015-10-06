@@ -1,1 +1,1 @@
-cd /vagrant/workspace/FDCDevRepo && git pull origin master 2>&1
+cd /vagrant/workspace/FDCDevRepo && git pull origin master 2>&1; echo "Code:"$?
