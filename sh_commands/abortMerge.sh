@@ -1,1 +1,0 @@
-cd /vagrant/workspace/FDCDevRepo && git reset --merge  2>&1;
