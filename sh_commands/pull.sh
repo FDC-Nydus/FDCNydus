@@ -1,1 +1,1 @@
-cd /vagrant/workspace/nc_add_d && git pull origin master
+cd /vagrant/workspace/FDCDevRepo && git pull origin master

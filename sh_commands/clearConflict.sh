@@ -1,1 +1,1 @@
-cd /vagrant/workspace/nc_add_d && git merge --abort
+cd /vagrant/workspace/FDCDevRepo && git merge --abort

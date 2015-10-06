@@ -21,7 +21,6 @@ $webhook = new FDCWebhook($payload);
 
 // check if the branch is allowed
 if ($webhook->isAllowedBranch() === FALSE) {
-	$notification->writeError(array("content" => "Invalid branch origin : ".$payload->ref));
 	exit();
 }
 
