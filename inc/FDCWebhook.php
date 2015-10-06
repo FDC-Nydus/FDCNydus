@@ -33,8 +33,6 @@ class FDCWebhook{
 		// return for hook window
 		echo "PULL RETURN \n";
 		echo $return . "\n";
-		echo $return1 . "\n";
-		echo $return2 . "\n";
 
 		// handle the git result
 		$this->handleGitResult($return);
