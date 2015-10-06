@@ -8,7 +8,7 @@ class FDCWebhook{
 	// construct
 	function __construct($payload = NULL){
 		$this->payload = $payload;
-		$notification = new NotificationInvoker();
+		self::$slack = new SlackInvoker();
 	}
 
 	// check if branch is allowed
@@ -25,14 +25,21 @@ class FDCWebhook{
 
 	// pull from dev branch
 	public function executePull(){
+		$return = array();
+
 		// execute pull command
 		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git fetch origin master');
-		$return1 = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git reset --hard FETCH_HEAD');
+		$return['pull_result'] = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git reset --hard FETCH_HEAD 2>&1');
 		$this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git clean -df');
+
+		// get list of files to be pushed
+		$return['file_list'] = $this->executeCommand('cd /vagrant/workspace/FDCDevRepo && git diff --stat');
 
 		// return for hook window
 		echo "PULL RETURN \n";
-		echo $return . "\n";
+		echo $return['pull_result']. "\n";
+		echo "CHANGED FILES \n";
+		echo $return['file_list']. "\n";
 
 		// handle the git result
 		$this->handleGitResult($return);
@@ -65,11 +72,15 @@ class FDCWebhook{
 
 		// slack message construction
 		$slackMessage .= "```";
+		$slackMessage .= "Date: ".date('Y/m/d H:i:s');
+		$slackMessage .= "LIST OF FILES CHANGED";
 		$slackMessage .= $result;
 		$slackMessage .= "```";
 
 		// slack username
 		$slackUname = GIT_BRANCH_LABEL." auto deployment ".date("Y-m-d H:i:s");
+
+			self::$slack->sendSlack($slackMessage);
 	}
 
 	// execute command

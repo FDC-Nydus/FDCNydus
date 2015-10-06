@@ -34,11 +34,11 @@ class SlackInvoker {
 		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 		
-	    $content = curl_exec( $ch );
-	    $response = curl_getinfo( $ch );
+	  $content = curl_exec( $ch );
+	  $response = curl_getinfo( $ch );
 		curl_error($ch);
-	    curl_close ( $ch );
-		return $response["http_code"];
+	  curl_close ( $ch );
+		// return $response["http_code"];
 	}
 }
 ?>
