@@ -1,1 +1,1 @@
-cd /vagrant/workspace/FDCDevRepo && git status | grep 'CONFLICTS'
+cd /vagrant/workspace/FDCDevRepo && git status | grep 'CONFLICT'
