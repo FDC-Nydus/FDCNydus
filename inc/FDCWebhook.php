@@ -53,7 +53,7 @@ class FDCWebhook{
 
 		$slackMessage .= "*COMMIT LINK*";
 		$slackMessage .= "```";
-		$slackMessage .= GIT_LINK . $result['pull_hash'];
+		$slackMessage .= $this->payload->compare;
 		$slackMessage .= "```\n";
 
 		$slackMessage .= "*SITE*";
