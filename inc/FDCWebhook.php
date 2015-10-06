@@ -40,6 +40,16 @@ class FDCWebhook{
 		// execute sh_commands/conflct.sh
 		// append error message + files
 		// execute clearConflicts.sh in sh_commands to abort merge
+		
+		// if something went wrong, abort merge
+		if (strpos($result, "status_code=0") == 0) {
+			$this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
+		}
+
+		$slackMessage = "```";
+		$slackMessage .= $result;
+		$slackMessage .= "```";
+		$slackUname = GIT_BRANCH_LABEL." auto deployment ".date("Y-m-d H:i:s");
 	}
 
 	// execute command
