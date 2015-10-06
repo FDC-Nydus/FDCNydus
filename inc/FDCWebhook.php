@@ -62,7 +62,7 @@ class FDCWebhook{
 		$slackMessage .= "```";
 
 		// slack username
-		$slackUname = GIT_BRANCH_LABEL." Auto Deployment " . date('Y/m/d H:i:s');
+		$slackUname = GIT_BRANCH_LABEL." Auto Deployment " . date('F j,Y H:i:s');
 
 		// set the slack username
 		$this->slack->username = $slackUname;
