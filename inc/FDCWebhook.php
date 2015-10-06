@@ -37,9 +37,7 @@ class FDCWebhook{
 		// check if conflicts occured or some other error occured.
 		// in the result string, for "pull", status_code=0 = success, status_code=1 = fail, status_code=<anything else> = we'll assume as fail
 		// if errors occured
-		// execute sh_commands/conflct.sh
-		// append error message + files
-		// execute clearConflicts.sh in sh_commands to abort merge
+		// execute abortMerge.sh in sh_commands to abort merge
 		
 		// if something went wrong, abort merge
 		if (strpos($result, "status_code=0") == 0) {
