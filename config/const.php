@@ -16,3 +16,4 @@ CONST GIT_BRANCH_LABEL = "Development Branch";
 
 // site name
 CONST SITE_NAME = "http//english.fdc-inc.com";
+CONST GIT_LINK = "https://github.com/FDC-Nydus/FDCDevRepo/commits/";
