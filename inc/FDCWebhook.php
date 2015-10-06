@@ -37,16 +37,23 @@ class FDCWebhook{
 		// check if conflicts occured or some other error occured.
 		// in the result string, for "pull", status_code=0 = success, status_code=1 = fail, status_code=<anything else> = we'll assume as fail
 		// if errors occured
-		// execute abortMerge.sh in sh_commands to abort merge
+		// execute abortMerge.sh in sh_commands to return the branch to its state before the merge
 		
+		// contains the message for slack
+		$slackMessage = "";
+
 		// if something went wrong, abort merge
 		if (strpos($result, "status_code=0") == 0) {
+			$slackMessage .= "Aborting merge \n";
 			$this->executeCommand('sh ' . dirname(DIR) . '/' . SH_DIR . '/' . SH_CLEAR_CONFLICT);
 		}
 
-		$slackMessage = "```";
+		// slack message construction
+		$slackMessage .= "```";
 		$slackMessage .= $result;
 		$slackMessage .= "```";
+
+		// slack username
 		$slackUname = GIT_BRANCH_LABEL." auto deployment ".date("Y-m-d H:i:s");
 	}
 
