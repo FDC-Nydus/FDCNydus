@@ -4,6 +4,8 @@ $path = dirname(__FILE__);
 // load
 require_once($path."/inc/inc.php");
 
+echo "<pre>";
+
 // declare error handler
 $notification = new NotificationInvoker();
 
@@ -14,8 +16,15 @@ $notification = new NotificationInvoker();
 	exit();
 }
 */
+
 // get payload.
-//$payload = json_decode($_POST['payload']);
+$payload = json_decode(@$_POST['payload']);
+
+// get post size
+$postSize = (int) @$_SERVER['CONTENT_LENGTH'];
+
+// show post size
+echo "Post Size : " . $postSize . "\n";
 
 // declare webhook
 $webhook = new FDCWebhook(@$payload);
