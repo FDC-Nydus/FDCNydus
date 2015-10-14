@@ -4,18 +4,15 @@ $path = dirname(__FILE__);
 // load
 require_once($path."/inc/inc.php");
 
-echo "<pre>";
-
 // declare error handler
 $notification = new NotificationInvoker();
 
 // check if post is TRUE
-/*if (isset($_POST['payload']) === FALSE) {
+if (isset($_POST['payload']) === FALSE) {
 	echo "Invalid POST data";
 	$notification->writeError(array("content" => "Invalid POST data"));
 	exit();
 }
-*/
 
 // get payload.
 $payload = json_decode(@$_POST['payload']);
@@ -30,11 +27,11 @@ echo "Post Size : " . $postSize . "\n";
 $webhook = new FDCWebhook(@$payload);
 
 // check if the branch is allowed
-/*if ($webhook->isAllowedBranch() === FALSE) {
+if ($webhook->isAllowedBranch() === FALSE) {
 	echo "Branch Origin should be from ".GIT_BRANCH_LABEL;
 	$notification->writeError(array("content" => "Branch Origin should be from ".GIT_BRANCH_LABEL));
 	exit();
-}*/
+}
 
 // execute pull
 $webhook->executePull();
