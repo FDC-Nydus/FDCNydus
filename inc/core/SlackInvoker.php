@@ -11,8 +11,6 @@ class SlackInvoker {
 	}
 
 	public function sendSlack(){
-		// return;
-		
 		$token = $this->token;
 		
 		$slack = "https://slack.com/api/chat.postMessage";
