@@ -36,3 +36,4 @@ if ($webhook->isAllowedBranch() === FALSE) {
 // execute pull
 $webhook->executePull();
 $notification->writeError(array("content" => "executed pull"));
+# test lang
